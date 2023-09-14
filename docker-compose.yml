@@ -1,0 +1,19 @@
+version: '3'
+services:
+  notebook_server:
+    image: jupyter_notebook:1.0
+    build: ./notebook-server
+    container_name: 'notebook_server'
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./workplace:/home/jovyan/
+    env_file:
+      - ./config/.env
+    command: jupyter-lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+    restart: always
+  
+# networks:
+#   default:
+#     external:
+#       name: 'test_ipv4'
